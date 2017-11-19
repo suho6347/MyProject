@@ -1,7 +1,75 @@
+#include "Altino.h"
 #include <stdio.h>
 
 int main()
-{
-  printf("Hello World!");
-  return 0;
+{/*
+ SensorData dat;
+ int i0, i1, i2, cd;
+ open(szPort);
+ while (1) {
+  i0 = dat.IRSensor[0];
+  i1 = dat.IRSensor[1];
+  i2 = dat.IRSensor[2];
+  cd = dat.CDSSensor;
+  //자율 주행하기
+  if (i1 > 100) {
+   //왼쪽으로 회전
+   if () {
+    steering(1);
+    Go(200,200);
+    Led(0x0040);
+    Led(0x0004);
+    Led(0x8000);
+   }
+   //오른쪽으로 회전
+   if () {
+    steering(3);
+    Go(200, 200);
+    Led(0x0040);
+    Led(0x0004);
+    Led(0x8000);
+   }
+   //후진하기
+   if () {
+    steering(2);
+    Go(-200,-200);
+    Led(0x0020);
+    Led(0x0002);
+    Led(0x0010);
+    Led(0x0001);
+   }
+
+  }
+  //중앙으로 가기
+  else {
+   //어두워지면 불켜기
+   if (cd < 100) {
+    Led(0x0040);
+    Led(0x0004);
+    Led(0x8000);
+    Led(0x0040);
+    Led(0x0004);
+    Led(0x8000);
+   }
+   //밝으면 불끄기
+   else if(cd>=100) {
+    Led(0);
+   }
+   steering(2);
+   Go(400,400);
+
+  }
+ }
+ close();*/
+
+    Open(szPort);
+    int i=0;
+    while(i < 1000){
+        Go(500,500);
+        i++;
+    }
+    Go(0,0);
+    close();
+
+    return 0;
 }
