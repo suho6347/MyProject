@@ -1,0 +1,98 @@
+#include "Altino.h"
+#include <stdio.h>
+void turn(int i3, int i4, int i2, int i1, int i0)
+{
+  printf("%d %d %d %d %d\n", i0, i1, i2, i3, i4);
+  if( i2 > 5 && i1 > 5 && i0 > 5 && i3 > 0 && i4 > 0){
+    Go(0,0);
+    DisplayLine(0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff);
+    delay(1000);
+    Sound(41);
+    delay(1000);
+    Sound(0);
+    return;
+  }    
+  else if(i3 < 10){ //오른쪽이 비어있다면        
+    Go(-300,-300);        
+    delay(2000);        
+    Steering(3);        
+    Go(300,300);       
+    delay(1500);   
+    return;   
+  }  
+  else if( i4 < 10 ){ //왼쪽이 비어있다면       
+    Go(-300,-300);  
+    delay(2000);   
+    Steering(1);  
+    Go(300,300);    
+    delay(1500);  
+    return;   
+  }
+}
+
+int main(){ 
+  SensorData dat; 
+  int i0, i1, i2, i3,i4,cd,t;
+  Open(szPort); 
+  dat = Sensor(10);
+  cd = dat.CDSSensor; 
+  if(cd > 200){
+    while (1) { 
+      dat = Sensor(10); 
+      i0 = dat.IRSensor[0]; 
+      i1 = dat.IRSensor[1]; 
+      i2 = dat.IRSensor[2];
+      i3 = dat.IRSensor[3]; 
+      i4 = dat.IRSensor[4];   
+      cd = dat.CDSSensor;//   
+      printf("%d\n", cd); 
+      Display(0);
+
+      if (cd < 200) {
+        Go(0,0);  
+        Display('B');     
+        delay(1000);  
+        Display('O');   
+        delay(1000);    
+        Display('Y'); 
+        delay(1000);   
+        Go(300,300);    
+        delay(1500);    
+        dat = Sensor(10);  
+        cd = dat.CDSSensor;
+      }
+  //자율 주행하기  
+      if (i1 > 100) { 
+        Go(0,0); 
+        delay(10);  
+        turn(i3, i4, i2, i1, i0);  
+        Steering(2);    
+        dat = Sensor(10); 
+        i0 = dat.IRSensor[0];   
+        i1 = dat.IRSensor[1]; 
+        i2 = dat.IRSensor[2];   
+        i3 = dat.IRSensor[3];   
+        i4 = dat.IRSensor[4];
+      }
+ 
+  
+      else {   
+        if(i0 > 10){   
+          Steering2(100,0);  
+          Go(300,300);    
+          delay(100);  
+        }  
+        else if(i2 > 10){ 
+          Steering2(-100,0);     
+          Go(300,300);     
+          delay(100);   
+        } 
+        Steering(2); 
+        Go(300,300);
+      } 
+    }
+    Close(); 
+  }
+   
+  return 0;
+}
