@@ -35,7 +35,57 @@ int main(){ 
   int i0, i1, i2, i3,i4,cd,t;
   Open(szPort); 
   dat = Sensor(10);
-  cd = dat.CDSSensor; 
+  cd = dat.CDSSensor;
+  
+  //1 문제
+/*while(1){ 
+    scanf("%d", &num);      
+    if(num == 1)
+      Go(500,500);
+    else if(num == 2)   
+      Go(0,0);    
+    else if(num == 3){ 
+      Go(0,0);   
+      break; 
+    } 
+    else if(num == 4){     
+      scanf("%d", &speed1);    
+      Go(speed1, speed1);  
+    }  
+  }*/
+  
+  //2 문제
+/*char ch;
+  while(1){
+    ch = getch();
+    switch(ch)
+    {
+    case 'w':
+      Steering(2);
+      Go(500,500);
+      break;
+    case 'a':
+      Steering(1);
+      Go(500,500);
+      break;
+    case 'd':
+      Steering(3);
+      Go(500,500);
+      break;
+    case 'x':
+      Steering(2);
+      Go(-500,-500);
+      break;
+    case 'q':
+      Steering(2);
+      Go(0,0);
+      break;
+    default:
+      break;
+    }
+  }*/
+  
+  
   if(cd > 200){
     while (1) { 
       dat = Sensor(10); 
